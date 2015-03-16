@@ -1,0 +1,18 @@
+---
+
+# Install Nginx
+
+- name: "Install packages"
+  yum: name={{ item }} state=latest disable_gpg_check=yes
+  sudo: yes
+  with_items:
+  - nginx
+
+- name: "Create folders"
+  file: dest={{ item }} state=directory
+        mode='0644'
+  sudo: yes
+  with_items:
+  - "/etc/nginx/sites"
+  - "/var/log/nginx"
+

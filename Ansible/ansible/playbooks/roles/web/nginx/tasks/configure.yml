@@ -1,0 +1,25 @@
+---
+
+# Configure Nginx
+
+- name: "Configure Nginx"
+  template: src={{ item.src }}
+            dest={{ item.dest }}
+            owner=root
+            group=root
+            mode='0644'
+  tags: 'nginx-config'
+  sudo: yes
+  notify: restart nginx
+  with_items:
+  - { src: 'nginx.conf',       dest: '/etc/nginx/nginx.conf' }
+  - { src: 'fastcgi_params',   dest: '/etc/nginx/fastcgi_params' }
+  - { src: 'default.conf',     dest: '/etc/nginx/conf.d/default.conf' }
+  - { src: 'virtual.conf',     dest: '/etc/nginx/conf.d/virtual.conf' }
+  - { src: 'ssl.conf',         dest: '/etc/nginx/conf.d/ssl.conf' }
+  - { src: 'example_ssl.conf', dest: '/etc/nginx/conf.d/example_ssl.conf' }
+
+- name: "Enable nginx"
+  service: name=nginx enabled=yes
+  sudo: yes
+

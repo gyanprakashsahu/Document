@@ -1,0 +1,7 @@
+---
+
+- hosts: test
+  roles:
+  - { role: web/nginx }
+  handlers:
+  - include: service-handlers/web/handlers.yml

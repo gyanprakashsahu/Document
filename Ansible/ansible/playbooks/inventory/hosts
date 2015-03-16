@@ -1,0 +1,2 @@
+[test]
+DCTE-DEVOPS	ansible_ssh_host=192.168.62.250
